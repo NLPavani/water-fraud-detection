@@ -261,3 +261,17 @@ python app.py
 ![Bulk Prediction Results](screenshots/bulk_non_fraud.png)
 ![Bulk Prediction Results](screenshots/bulk_fraud.png)
 
+## 👤 Author
+
+Developed as an academic project by : 
+NL Pavani
+Vurakana Srividya 
+Minamreddy meghana
+Harivaram Naga kavitha
+
+**Project:** Detection of Fraudulent Behaviour in Drinking Water Consumption
+Using KNN & SVM Algorithms
+
+© 2026 NL Pavani and Project Team All rights reserved.
+
+This project is published for academic and portfolio purposes. The source code, machine learning models, documentation, and project materials are the original work of the author. Unauthorized copying, redistribution, or claiming this project as one's own is prohibited.

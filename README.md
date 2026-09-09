@@ -94,3 +94,170 @@ Customer Water Consumption Data
        Prediction Result
               ↓
         Flask Web Interface
+
+
+## 🌐 Web Application Features
+
+### 🔐 User Authentication
+
+- User registration
+- Secure password hashing
+- Login and logout functionality
+
+### 👤 Single Customer Prediction
+
+Users can enter individual customer information and receive:
+
+- Fraud / Non-Fraud classification
+- Fraud probability
+
+### 📁 Bulk Prediction
+
+Users can upload a CSV file containing multiple customer records.
+
+The system analyses the records and displays:
+
+- Customer prediction
+- Fraud probability
+- Fraudulent customers
+- Non-fraudulent customers
+
+### 📊 Dashboard
+
+The dashboard provides an overview of the prediction system and the machine learning approach.
+
+## 🛠️ Technologies Used
+
+### Programming Language
+- Python
+
+### Machine Learning
+- Scikit-learn
+- Support Vector Machine (SVM)
+- StandardScaler
+
+### Web Development
+- Flask
+- HTML
+- CSS
+- Jinja2
+
+### Database
+- MySQL
+
+### Data Processing
+- Pandas
+- NumPy
+
+### Model Storage
+- Joblib
+- Pickle
+
+### Development Tools
+- Visual Studio Code
+- MySQL Workbench
+- Git
+- GitHub
+
+## 📁 Project Structure
+
+```text
+water_fraud_detection/
+│
+├── app.py
+├── train_model.py
+├── check_pkl.py
+├── backend_analysis.py
+├── requirements.txt
+├── README.md
+├── .gitignore
+│
+├── model_files/
+│   ├── best_fraud_detection_model_SVM.pkl
+│   ├── scaler.pkl
+│   └── feature_names.pkl
+│
+├── templates/
+│   ├── login.html
+│   ├── signup.html
+│   ├── dashboard.html
+│   ├── predict.html
+│   └── upload.html
+│
+├── static/
+│   └── images/
+│
+├── screenshots/
+│
+├── final_water_consumption_fraud_dataset.csv
+└── test_dataset_50.csv
+```
+
+## ⚙️ Installation & Setup
+
+### 1. Clone the repository
+
+```bash
+git clone https://github.com/YOUR_USERNAME/water-fraud-detection.git
+```
+1. OPEN THE PROJECT
+```bash
+cd water-fraud-detection
+```
+
+2.CREATE A VIRTUAL ENVIRONMENT
+```bash
+python -m venv venv
+```
+3.ACTIVATE THE VIRTUAL ENVIRONMENT
+```bash
+venv\Scripts\activate
+```
+4.INSTALL DEPENDENCIES
+```bash
+pip install -r requirements.txt
+```
+
+### 5. CONFIGURE ENVIRONMENT VARIABLES
+
+Create a `.env` file in the project folder:
+
+```text
+DB_HOST=127.0.0.1
+DB_USER=root
+DB_PASSWORD=YOUR_MYSQL_PASSWORD
+DB_NAME=fraud_water
+```
+6.START THE FLASK APPLICATION
+```bash
+python app.py
+```
+
+## 📸 Screenshots
+
+### 🔐 Login & Registration
+
+![Login Page](screenshots/login.png)
+![Signup Page](screenshots/signup.png)
+
+### 📊 Dashboard
+
+![Dashboard](screenshots/dashboard.png)
+![Dashboard](screenshots/dashboard2.png)
+
+### 🔮 Prediction Options
+
+![Single and Bulk Upload](screenshots/single_and_bulk_uploads.png)
+
+### 👤 Single Customer Prediction
+
+![Single Prediction Form](screenshots/single_prediction.png)
+![Non-Fraud Result](screenshots/single_non_fraud.png)
+![Fraud Result](screenshots/single_fraud.png)
+
+### 📁 Bulk Prediction
+
+![Bulk Prediction Results](screenshots/bulk_results.png)
+![Bulk Prediction Results](screenshots/bulk_non_fraud.png)
+![Bulk Prediction Results](screenshots/bulk_fraud.png)
+

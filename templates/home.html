@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Water Fraud Detection Dashboard</title>
+
+    <!-- ✅ ADD HERE -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <!-- Existing font -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #f4f9fc, #eaf6fb, #ffffff);
+            color: #1f2937;
+            min-height: 100vh;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1100px;
+            margin: auto;
+            padding: 30px;
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 36px;
+            margin-bottom: 25px;
+            color: #123b5d;
+            text-shadow: none;
+        }
+
+        /* Cards */
+        .card {
+            background: rgba(255, 255, 255, 0.95);
+            border: 1px solid #dbe7ee;
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-radius: 18px;
+            padding: 25px;
+            margin-bottom: 25px;
+            box-shadow: 0 10px 30px rgba(31, 78, 105, 0.10);
+            transition: 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(31, 78, 105, 0.15);
+            border: 1px solid rgba(0, 180, 216, 0.35);
+        }
+
+        .card h2 {
+            color: #123b5d;
+            margin-bottom: 12px;
+        }
+
+        .card h3 {
+            color: #245a78;
+            margin-top: 15px;
+            margin-bottom: 10px;
+        }
+
+        .card p {
+            color: #4b5563;
+            line-height: 1.7;
+        }
+
+        /* Algorithm Links */
+        .algo span {
+            cursor: pointer;
+            color: #0077b6;
+            font-weight: 600;
+        }
+
+        .algo span:hover {
+            text-decoration: underline;
+        }
+
+        .hidden {
+            display: none;
+            margin-top: 10px;
+            color: #4b5563;
+            line-height: 1.6;
+        }
+
+        /* Inputs */
+        input {
+            padding: 10px;
+            margin: 6px;
+            border-radius: 8px;
+            border: 1px solid #cbd5e1;
+            background: #ffffff;
+            color: #1f2937;
+            outline: none;
+        }
+
+        input::placeholder {
+            color: #7b8794;
+        }
+
+        input:focus {
+            border: 1px solid #00b4d8;
+            box-shadow: 0 0 0 3px rgba(0, 180, 216, 0.10);
+        }
+
+        /* Buttons */
+        button {
+            padding: 12px 22px;
+            border: none;
+            border-radius: 10px;
+            margin-left: 10px;
+            background: linear-gradient(135deg, #00b4d8, #0077b6);
+            color: white;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.3s;
+            margin-top: 10px;
+        }
+
+        button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 25px rgba(0, 180, 216, 0.25);
+        }
+
+        /* Result */
+        #resultBox {
+            margin-top: 15px;
+            font-weight: bold;
+            color: #008f75;
+        }
+
+        .table-container {
+            margin-top: 20px;
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: #ffffff;
+            backdrop-filter: blur(12px);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.06);
+        }
+
+        th,
+        td {
+            padding: 12px;
+            text-align: center;
+            border-bottom: 1px solid #e5e7eb;
+            color: #374151;
+        }
+
+        th {
+            background: rgba(0, 180, 216, 0.12);
+            color: #123b5d;
+            font-weight: 600;
+        }
+
+        tr:hover {
+            background: #f0f9fc;
+        }
+
+        /* Fraud highlighting */
+        .fraud {
+            color: #dc2626;
+            font-weight: bold;
+        }
+
+        .nonfraud {
+            color: #059669;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+
+        <div style="display:flex; justify-content:space-between; align-items:center;">
+            <h1>💧 Detection of Fraudulent Behavior in Drinking Water Consumption</h1>
+
+            <a href="/logout">
+                <button>Logout</button>
+            </a>
+        </div>
+
+        <!-- ✅ System Overview -->
+        <div class="card">
+            <h2>System Overview</h2>
+            <p>
+                This system analyzes water consumption patterns using Machine Learning algorithms
+                to detect fraudulent usage. It supports both single prediction and bulk analysis
+                for efficient monitoring of abnormal consumption behavior.
+            </p>
+        </div>
+
+        <!-- ✅ Algorithms -->
+        <div class="card">
+            <h2>Algorithms Used</h2>
+
+            <p class="algo">
+                <span onclick="toggle('knn')">KNN</span> |
+                <span onclick="toggle('svm')">SVM</span>
+            </p>
+
+            <div id="knn" class="hidden">
+                <b>K-Nearest Neighbors (KNN):</b><br><br>
+                KNN is a supervised machine learning algorithm used for classification and pattern recognition.
+                It works by identifying the ‘K’ closest data points (neighbors) to a given input based on distance
+                metrics
+                such as Euclidean distance.
+
+                In this project, KNN analyzes water consumption behavior by comparing a user's current usage
+                with historical records of similar consumers. If the usage pattern significantly deviates from its
+                nearest neighbors, it may indicate abnormal or fraudulent activity.
+
+                KNN is simple, intuitive, and highly effective for detecting localized anomalies in datasets where
+                similar patterns tend to cluster together.
+            </div>
+
+            <div id="svm" class="hidden">
+                <b>Support Vector Machine (SVM):</b><br><br>
+                SVM is a powerful supervised learning algorithm used mainly for classification tasks. It works by
+                finding the optimal hyperplane that best separates different classes in a high-dimensional feature
+                space.
+
+                In this system, SVM is used to distinguish between normal and fraudulent water consumption patterns.
+                It focuses on maximizing the margin between the two classes, making it highly reliable even when the
+                data is complex or not linearly separable.
+
+                SVM can also utilize kernel functions to map data into higher dimensions, enabling it to
+                capturenon-linear relationships in consumption behavior, which is crucial for real-world fraud detection
+                scenarios.
+            </div>
+        </div>
+        <!-- ✅ Algorithm Performance Chart -->
+        <div class="card">
+            <h2 style="cursor:pointer; color:#00e0ff;" onclick="toggleChart()">
+                Algorithm Performance Comparison (Click to View)
+            </h2>
+
+            <div id="chartContainer" style="display:none; margin-top:15px;">
+                <canvas id="comparisonChart"></canvas>
+
+                <p style="margin-top:10px; color:#ccc;">
+                    This chart compares KNN and SVM performance based on accuracy.
+                </p>
+            </div>
+        </div>
+
+        <!-- ✅ Prediction Section (UNCHANGED FUNCTIONALITY) -->
+        <div class="card">
+
+            <h2>Prediction System</h2>
+
+            <!-- 🔹 Single Prediction (uses your existing /predict route) -->
+            <h3>Single Prediction</h3>
+
+            <form action="/predict" method="POST">
+                {% for feature in features %}
+                {% if feature not in ['Usage_Ratio','Billing_Per_Usage','Deviation_Ratio'] %}
+                <input type="number" step="any" name="{{ feature }}" placeholder="{{ feature }}" required>
+                {% endif %}
+                {% endfor %}
+
+                <br>
+                <button type="submit">Predict</button>
+            </form>
+
+            <!-- 🔹 Bulk Prediction (uses your existing /upload route) -->
+            <h3 style="margin-top:20px;">Bulk Prediction</h3>
+
+            <form action="/upload" method="POST" enctype="multipart/form-data">
+                <input type="file" name="file" required>
+                <br>
+                <button type="submit">Upload CSV</button>
+            </form>
+
+        </div>
+
+    </div>
+
+    <script>
+        function toggle(id) {
+            let el = document.getElementById(id);
+            el.style.display = (el.style.display === 'block') ? 'none' : 'block';
+        }
+
+        /* ✅ NEW FUNCTION FOR CHART TOGGLE */
+        let chartInitialized = false;
+
+        function toggleChart() {
+            let container = document.getElementById("chartContainer");
+
+            if (container.style.display === "block") {
+                container.style.display = "none";
+            } else {
+                container.style.display = "block";
+
+                // ✅ Create chart only once
+                if (!chartInitialized) {
+                    const ctx = document.getElementById('comparisonChart').getContext('2d');
+
+                    new Chart(ctx, {
+                        type: 'bar',
+                        data: {
+                            labels: ['KNN', 'SVM'],
+                            datasets: [{
+                                label: 'Accuracy (%)',
+                                data: [85, 92],
+                                backgroundColor: [
+                                    'rgba(0, 198, 255, 0.7)',
+                                    'rgba(0, 114, 255, 0.7)'
+                                ], borderRadius: 8
+                            }]
+                        },
+                        options: {
+                            plugins: {
+                                legend: {
+                                    labels: { color: 'white' }
+                                }
+                            },
+                            scales: {
+                                y: {
+                                    beginAtZero: true,
+                                    ticks: { color: 'white' }
+                                },
+                                x: {
+                                    ticks: { color: 'white' }
+                                }
+                            }
+                        }
+                    });
+
+                    chartInitialized = true;
+                }
+            }
+        }
+    </script>
+
+</body>
+
+</html>

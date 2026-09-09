@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Bulk Fraud Detection</title>
+
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #f4f9fc, #eaf6fb, #ffffff);
+            margin: 0;
+            color: #1f2937;
+        }
+
+        .container {
+            width: 85%;
+            margin: auto;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(14px);
+            border: 1px solid #dbe7ee;
+            border-radius: 16px;
+            padding: 25px;
+            margin-top: 30px;
+            box-shadow: 0 10px 30px rgba(31, 78, 105, 0.10);
+        }
+
+        h1 {
+            text-align: center;
+            color: #123b5d;
+        }
+
+        /* Inputs */
+        input {
+            padding: 10px;
+            margin: 5px;
+            border-radius: 6px;
+            border: 1px solid #cbd5e1;
+            background: #ffffff;
+            color: #1f2937;
+        }
+
+        /* Buttons */
+        button {
+            padding: 10px 18px;
+            margin: 5px;
+            border-radius: 8px;
+            border: none;
+            background: linear-gradient(135deg, #00b4d8, #0077b6);
+            color: white;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 20px rgba(0, 180, 216, 0.3);
+        }
+
+        .stats {
+            margin-top: 20px;
+            padding: 10px;
+            background: #f1f8fb;
+            border: 1px solid #dbe7ee;
+            border-radius: 8px;
+        }
+
+        .fraud {
+            color: #dc2626;
+            font-weight: bold;
+        }
+
+        .safe {
+            color: #059669;
+            font-weight: bold;
+        }
+
+        .table-container {
+            margin-top: 20px;
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            background: #ffffff;
+            backdrop-filter: blur(12px);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.06);
+        }
+
+        th,
+        td {
+            padding: 12px;
+            text-align: center;
+            border-bottom: 1px solid #e5e7eb;
+            color: #374151;
+        }
+
+        th {
+            background: rgba(0, 180, 216, 0.12);
+            color: #123b5d;
+            font-weight: 600;
+        }
+
+        tr:hover {
+            background: #f0f9fc;
+        }
+
+        /* Fraud highlight */
+        .fraud {
+            color: #dc2626;
+            font-weight: bold;
+        }
+
+        .safe {
+            color: #059669;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+
+        <h1 style="text-align:center;">💧 Bulk Fraud Analysis Dashboard</h1>
+
+        <form method="POST" enctype="multipart/form-data">
+            <input type="file" name="file" required>
+            <button type="submit">Upload & Analyze</button>
+        </form>
+
+        {% if stats %}
+        <div class="stats">
+            <p>Total Records: {{ stats.total }}</p>
+            <p class="fraud">Fraud Count: {{ stats.fraud }}</p>
+            <p class="safe">Non-Fraud Count: {{ stats.non_fraud }}</p>
+        </div>
+        {% endif %}
+
+        {% if download_link %}
+        <a href="{{ download_link }}">
+            <button>⬇️ Download Results CSV</button>
+        </a>
+        {% endif %}
+
+        {% if table %}
+
+        <div class="table-container">
+            {{ table | safe }}
+        </div>
+
+        <div style="margin-top:20px;">
+            <button onclick="showFraud()">
+                🚨 Fraud Customers ({{ fraud_count }})
+            </button>
+
+            <button onclick="showNonFraud()">
+                ✅ Non-Fraud Customers ({{ nonfraud_count }})
+            </button>
+        </div>
+
+        <div id="fraudSection" style="display:none;">
+            <h3>Fraud Customers</h3>
+            {{ fraud_list | safe }}
+        </div>
+
+        <div id="nonFraudSection" style="display:none;">
+            <h3>Non-Fraud Customers</h3>
+            {{ nonfraud_list | safe }}
+        </div>
+
+        {% endif %}
+
+
+    </div>
+    <script>
+        function showFraud() {
+            document.getElementById("fraudSection").style.display = "block";
+            document.getElementById("nonFraudSection").style.display = "none";
+        }
+
+        function showNonFraud() {
+            document.getElementById("fraudSection").style.display = "none";
+            document.getElementById("nonFraudSection").style.display = "block";
+        }
+
+        function showAll() {
+            document.getElementById("fraudSection").style.display = "block";
+            document.getElementById("nonFraudSection").style.display = "block";
+        }
+    </script>
+
+</body>
+
+</html>

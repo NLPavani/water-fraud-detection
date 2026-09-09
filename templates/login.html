@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Login | Water Fraud Detection</title>
+
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+
+            background: url("/static/images/water_bg.jpg") no-repeat center center;
+            background-size: cover;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .login-container {
+            background: rgba(255, 255, 255, 0.92);
+            padding: 35px;
+            border-radius: 16px;
+            width: 340px;
+
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(10px);
+
+            text-align: center;
+        }
+
+        h2 {
+            margin-bottom: 10px;
+            color: #0077b6;
+        }
+
+        .subtitle {
+            font-size: 14px;
+            color: #555;
+            margin-bottom: 20px;
+        }
+
+        input {
+            width: 90%;
+            padding: 12px;
+            margin: 10px 0;
+
+            border: 1px solid #ccc;
+            border-radius: 8px;
+
+            outline: none;
+            transition: 0.3s;
+        }
+
+        input:focus {
+            border-color: #0077b6;
+            box-shadow: 0 0 5px rgba(0, 119, 182, 0.3);
+        }
+
+        button {
+            width: 95%;
+            padding: 12px;
+            margin-top: 15px;
+
+            border: none;
+            border-radius: 8px;
+
+            background: linear-gradient(135deg, #0077b6, #00b4d8);
+            color: white;
+            font-size: 15px;
+
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0, 119, 182, 0.3);
+        }
+
+        .error {
+            color: red;
+            font-size: 13px;
+            margin-top: 10px;
+        }
+
+        .signup-link {
+            margin-top: 15px;
+            font-size: 13px;
+        }
+
+        .signup-link a {
+            color: #0077b6;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .signup-link a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="login-container">
+
+        <h2>💧 Welcome Back</h2>
+        <div class="subtitle">Water Fraud Detection System</div>
+
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        <div class="error">{{ messages[0] }}</div>
+        {% endif %}
+        {% endwith %}
+
+        <form method="POST">
+            <input type="text" name="username" placeholder="Enter Username" required>
+            <input type="password" name="password" placeholder="Enter Password" required>
+
+            <button type="submit">Login</button>
+        </form>
+
+        <div class="signup-link">
+            Don’t have an account? <a href="/signup">Sign Up</a>
+        </div>
+
+    </div>
+
+</body>
+
+</html>

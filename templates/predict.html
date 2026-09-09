@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Prediction</title>
+</head>
+
+<body>
+
+    <h2>Single Customer Prediction</h2>
+
+    <form method="POST">
+
+        <input type="number" step="any" name="Avg_Monthly_Usage_KL" placeholder="Avg Monthly Usage" required><br>
+        <input type="number" step="any" name="Current_Month_Usage_KL" placeholder="Current Month Usage" required><br>
+        <input type="number" step="any" name="Billing_Amount" placeholder="Billing Amount" required><br>
+        <input type="number" step="any" name="Payment_Delay_Days" placeholder="Payment Delay Days" required><br>
+        <input type="number" step="any" name="Usage_Deviation" placeholder="Usage Deviation" required><br>
+        <input type="number" step="any" name="Account_Age_Months" placeholder="Account Age (Months)" required><br>
+        <input type="number" step="any" name="Payment_History_Score" placeholder="Payment History Score" required><br>
+        <input type="number" step="any" name="Neighborhood_Avg_Usage" placeholder="Neighborhood Avg Usage" required><br>
+        <input type="number" step="any" name="Seasonal_Factor" placeholder="Seasonal Factor" required><br>
+        <input type="number" step="any" name="Previous_Fraud_Flags" placeholder="Previous Fraud Flags" required><br>
+
+        <button type="submit">Predict</button>
+
+    </form>
+
+    {% if result %}
+    <h3>Prediction: {{ result.prediction }}</h3>
+    <h3>Fraud Probability: {{ result.prob }}</h3>
+    {% endif %}
+
+</body>
+
+</html>

@@ -264,10 +264,10 @@ python app.py
 ## 👤 Author
 
 Developed as an academic project by : 
-NL Pavani
-Vurakana Srividya 
-Minamreddy meghana
-Harivaram Naga kavitha
+NL Pavani,
+Vurakana Srividya, 
+Minamreddy meghana,
+Harivaram Naga kavitha.
 
 **Project:** Detection of Fraudulent Behaviour in Drinking Water Consumption
 Using KNN & SVM Algorithms
